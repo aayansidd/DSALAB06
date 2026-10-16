@@ -1,0 +1,75 @@
+//Aayan Siddiqui 570014
+
+#include <iostream>
+using namespace std;
+
+struct queue {
+    int items[5];
+    int front = -1;
+    int rear = - 1;
+
+    void enqueue(int val) {
+        if (rear == -1 && front == -1) {
+            front = 0;
+            rear = 0;
+            items[rear] = val;
+        } else if (rear < 4) {
+            rear++;
+            items[rear] = val;
+        } else {
+            cout << "Queue full" << endl;
+        }
+    }
+
+    void dequeue() {
+        if (rear == -1 && front == -1) {
+            cout << "Queue empty";
+        } else if (rear == front){
+            int val = items[front];
+            rear = -1;
+            front = -1;
+            cout << "Value popped: " << val << endl;
+        } else {
+            int val = items[front];
+            front++;
+            cout << "Value popped: " << val << endl;
+        }
+    }
+
+    void display() {
+        if (rear == -1 && front == -1) {
+            cout << "Queue empty" << endl;
+            return;
+        }
+
+        int curr = front;
+
+
+        while (curr <= rear) {
+            cout << items[curr] << "->";
+            curr++;
+        }
+        cout << "end" << endl;
+    }
+
+    void peekfront() {
+        if (front == -1) {
+            cout << "Queue empty" << endl;
+        } else {
+            cout << "Front value: " << items[front] << endl;
+        }
+    }
+};
+
+int main() {
+    queue myQueue;
+
+    myQueue.enqueue(10);
+    myQueue.enqueue(20);
+    myQueue.enqueue(30);
+    myQueue.dequeue();
+    myQueue.display();
+    myQueue.peekfront();
+    myQueue.display();
+    myQueue.enqueue(40);
+}
