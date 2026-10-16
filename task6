@@ -1,0 +1,112 @@
+//Aayan Siddiqui 570014
+#include <iostream>
+using namespace std;
+
+struct queue {
+    int items[5];
+    int front = -1;
+    int rear = -1;
+
+    void enqueue(int val) {
+        if (rear == -1 && front == -1) {
+            front = 0;
+            rear = 0;
+            items[rear] = val;
+            cout << "Customer token " << val << " added to queue" << endl;
+        } else if (rear < 4) {
+            rear++;
+            items[rear] = val;
+            cout << "Customer token " << val << " added to queue" << endl;
+        } else {
+            cout << "Queue full! Cannot add more customers." << endl;
+            cout << "Note: Insertion is blocked because rear is at position 4." << endl;
+        }
+    }
+
+    void dequeue() {
+        if (rear == -1 && front == -1) {
+            cout << "Queue empty! No customers to serve." << endl;
+        } else if (rear == front) {
+            int val = items[front];
+            rear = -1;
+            front = -1;
+            cout << "Serving customer token: " << val << endl;
+        } else {
+            int val = items[front];
+            front++;
+            cout << "Serving customer token: " << val << endl;
+        }
+    }
+
+    void display() {
+        if (rear == -1 && front == -1) {
+            cout << "Queue is empty! No customers waiting." << endl;
+            return;
+        }
+
+        cout << "Customers in queue: ";
+        int curr = front;
+
+        while (curr <= rear) {
+            cout << items[curr];
+            if (curr < rear) {
+                cout << " -> ";
+            }
+            curr++;
+        }
+        cout << endl;
+    }
+
+    void peekfront() {
+        if (front == -1) {
+            cout << "Queue empty! No customer to view." << endl;
+        } else {
+            cout << "Next customer token: " << items[front] << endl;
+        }
+    }
+};
+
+int main() {
+    queue customerQueue;
+    int choice, tokenNumber;
+
+    cout << "===== Customer Service Queue System =====" << endl;
+    cout << "Queue size: 5 customers" << endl;
+    cout << "Customers are served in arrival order (FIFO)" << endl << endl;
+
+    do {
+        cout << "\n----- Menu -----" << endl;
+        cout << "1. Add customer" << endl;
+        cout << "2. Serve next" << endl;
+        cout << "3. View next" << endl;
+        cout << "4. Display queue" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter customer token number: ";
+                cin >> tokenNumber;
+                customerQueue.enqueue(tokenNumber);
+                break;
+            case 2:
+                customerQueue.dequeue();
+                break;
+            case 3:
+                customerQueue.peekfront();
+                break;
+            case 4:
+                customerQueue.display();
+                break;
+            case 5:
+                cout << "\nExiting Customer Service Queue System..." << endl;
+                cout << "Goodbye!" << endl;
+                break;
+            default:
+                cout << "Invalid choice! Please enter a number between 1 and 5." << endl;
+        }
+    } while (choice != 5);
+
+    return 0;
+}
