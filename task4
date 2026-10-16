@@ -1,0 +1,66 @@
+//Aayan Siddiqui 570014
+
+#include <iostream>
+using namespace std;
+
+struct queue {
+    int items[5];
+    int front = -1;
+    int rear = - 1;
+
+    void enqueue(int val) {
+        if (rear == -1 && front == -1) {
+            front = 0;
+            rear = 0;
+            items[rear] = val;
+        } else if (rear < 4) {
+            rear++;
+            items[rear] = val;
+        } else {
+            cout << "Queue full" << endl;
+        }
+    }
+
+    // void removeNode() {
+    //     if (rear == -1) {
+    //         cout << "Queue empty";
+    //     } else if (rear == front){
+    //         int val = items[rear];
+    //         rear = -1;
+    //         front = -1;
+    //         cout << "Value popped: " << val;
+    //     } else {
+    //         int val = items[rear];
+    //         rear--;
+    //         cout << "Value popped: " << val;
+    //     }
+    // }
+
+    void display() {
+        if (rear == -1 && front == -1) {
+            cout << "Queue empty" << endl;
+            return;
+        }
+
+        int curr = front;
+
+
+        while (curr <= rear) {
+            cout << items[curr] << "->";
+            curr++;
+        }
+        cout << "end" << endl;
+    }
+};
+
+int main() {
+    queue myQueue;
+
+    myQueue.enqueue(10);
+    myQueue.enqueue(20);
+    myQueue.enqueue(30);
+    myQueue.display();
+    myQueue.enqueue(40);
+    myQueue.enqueue(50);
+    myQueue.enqueue(30);
+}
